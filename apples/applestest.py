@@ -104,7 +104,7 @@ class ApplesToApples:
 
 
     def win_round(self, judge, submitted):
-        print(judge.get_name() + ", the submitted cards are: " + str(submitted))
+        print(judge.get_name() + ", the submitted cards are: " + str(random.shuffle(submitted)))
         winner = input("Select a winner: ")
         while winner not in submitted:
             print("That is not one of the submitted cards")
