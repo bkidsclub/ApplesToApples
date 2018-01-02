@@ -80,27 +80,34 @@ class ApplesToApples:
         print("Game over! Your score is " + str(score))
 
 
-    def win_round(self):
+    def win_round(self, judge):
+        winner = input("Select a winner: ")
+        
+        #
         win = random.randint(0, self.num_players-1)
         print("Player " + str(win) +" you win this round! your score is " + str(score))
         print("")
         print("--------------------------------")
 
     def play_round(self, judge):
-        green_card = self.green_deck.pop()
-        for player in self.players: 
+        round_players = self.players[:]
+        round_players.remove(judge) 
+
+        for player in round_players: 
             print("Player " + str(j) + " here are your cards: " + str(hands[j])) #render each player's cards
+
+        green_card = self.green_deck.pop() 
         print("The green apple is: " + green_card) #render green card
 
-        for player in self.players:
+        for player in round_players:
             submission = input("Player " + str(j) + " Submit a card: ") #wait for every player to submit a card
             while submission not in player.get_hand(): #we don't need this with the GUI
                 print("This word is not in your hand")
             player.remove_card(submission)
 
-        self.win_round()
+        self.win_round(judge)
 
-        for player in self.players: #give each player a new card
+        for player in round_players: #give each player a new card
             new_card = self.red_deck.pop()
             player.give_card(new_card)
             print("Player " + player.name() + " here is your new card: " + new_card)
