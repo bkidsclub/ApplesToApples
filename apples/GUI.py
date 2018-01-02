@@ -1,11 +1,30 @@
 from tkinter import *
 import tkinter as tk
-#Creating the Canvas
+#Buttons
 root = tk.Tk ()
+frame = Frame(root, bg='grey', width=400, height=40)
+frame.pack(fill='x')
+button1 = Button(frame, text='Card1', width="12")
+button1.pack(side='left')
+button2 = Button(frame, text='Card2', width="12")
+button2.pack(side='left')
+button3 = Button(frame, text='Card3', width="12")
+button3.pack(side='left')
+button4 = Button(frame, text='Card4', width="12")
+button4.pack(side='left')
+button5 = Button(frame, text='Card5', width="12")
+button5.pack(side='left')
+button6 = Button(frame, text='Card6', width="12")
+button6.pack(side='left')
+button7 = Button(frame, text='Card7', width="12")
+button7.pack(side='left')
+#Canvas Creation
 canvas = Canvas(root, width=1280, height=1080, bg="#cc9900")
 canvas.pack()
 #Green Card
 canvas.create_rectangle( 300, 300, 650, 600, fill="#33cc33", outline="white", width=4)
+canvas.create_text(475, 450, fill="white", font="Times 20 italic bold",
+                    text="GappleCard")
 #Choices
 canvas.create_text(50, 10, fill="white", font="Times 20 italic bold",
                    text="Rapple1")
@@ -22,9 +41,6 @@ canvas.create_text(50, 110, fill="white", font="Times 20 italic bold",
 canvas.create_text(50, 130, fill="white", font="Times 20 italic bold",
                    text="Rapple7")
 #Buttons to choose the word
-master = Tk()
-b = Button(master, text="OK", command=print("good"))
-b.pack()
 #Red Cards
 canvas.create_rectangle( 750, 700, 950, 900, fill="#ff3300", outline="white", width=4)
 canvas.create_rectangle( 800, 700, 1000, 900, fill="#ff3300", outline="white", width=4)
