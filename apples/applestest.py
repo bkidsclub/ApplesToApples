@@ -37,7 +37,7 @@ class Player:
 
     def remove_card(self, card):
         for c in self.cards:
-            if c.get_name() == card:
+            if c.get_name().replace(" ", "") == card:
                 self.cards.remove(c)
 
         #self.cards.remove(card)
@@ -124,7 +124,7 @@ class ApplesToApples:
         round_players = self.players[:]
         round_players.remove(judge) 
 
-        green_card = self.green_deck.pop() 
+        green_card = self.green_deck.pop(random.randint(0,len(self.green_deck)-1)) 
         print("The green apple is: " + str(green_card)) #render green card
 
         submitted = []
