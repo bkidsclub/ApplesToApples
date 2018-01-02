@@ -1,46 +1,110 @@
-#import load
+import load
 import random
 
-print("small apples to apples")
-players = input("Give player names, separated by comma: ").strip().split(',')
-num_players = len(players)
-#load.loadCards('file.txt')
-green_deck = ['Spicy', 'Aromatic', 'Amazing']
-red_deck = ['cow', 'dog', 'cat', 'fly', 'spice', 'word', 'creeper', 'minecraft', 'crepe', 
-'Abraham Lincoln', 'cow', 'dog', 'cat', 'fly', 'spice', 'word', 'creeper', 'minecraft', 'crepe', 'Abraham Lincoln',
-'cow', 'dog', 'cat', 'fly', 'spice', 'word', 'creeper', 'minecraft', 'crepe', 'Abraham Lincoln']
+class Apple:
+    '''An apple'''
+    def __init__(self, name, flavor_text, red=True):
+        self.name = name
+        self.flavor_text = flavor_text
+        self.red = red
 
-hands = []
-for j in range(num_players):
-    hand = []
-    for i in range(0, 7):
-        hand.append(red_deck.pop(random.randint(0,len(red_deck))))
-    hands.append(hand)
+    def name(self):
+        # Return the name of this card
+        return self.name
+
+    def type(self):
+        # Is the type Red
+        return self.type
+
+    def render(self):
+        # Render this apple in the window 
+        pass
+
+    def __str__(self):
+        # Name : Flavor Text
+        return self.name + ": " + self.flavor_text
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+
+    def deal_hand(self, cards):
+        self.cards = cards
+
+    def give_card(self, card):
+        self.cards.append(card)
+
+    def remove_card(self, card):
+        self.cards.remove(card)
+
+    def get_hand(self):
+        return self.cards
+
+    def get_name(self):
+        return self.name
+
+class ApplesToApples:
+    def __init__(self):
+        green_cards = load.loadCards('GAPPLE')
+        red_cards = load.loadCards('RAPPLE')
+        self.green_deck = []
+        self.red_deck = []
+
+        for g in green_cards:
+            self.green_deck.append(Apple(g, None, red=False))
+
+        for r in red_cards:
+            self.red_deck.append(Apple(r, None))
+
+        self.play_game()
 
 
-score = 0
-while len(green_deck) > 0:
-    green_card = green_deck.pop()
-    for j in range(num_players):
-        print("Player " + str(j) + " here are your cards: " + str(hands[j]))
-    print("The green apple is: " + green_card)
+    def start(self):
+        print("Apples To Apples") #render begin screen
+        self.players = input("Give player names, separated by comma: ").strip().split(',') #initialize players
+        self.num_players = len(self.players)
+        self.scores = collections.Counter()
 
-    for j in range(num_players):
-        sub = input("Player " + str(j) + " Submit a card: ")
-        while sub not in hands[j]:
-            print("This word is not in your hand")
-            sub = input("Submit a card: ")
-        hands[j].remove(sub)
-    score += 1
+        for player in self.players: #deal hands
+            hand = []
+            for i in range(0, 7):
+                hand.append(self.red_deck.pop(random.randint(0,len(self.red_deck)-1)))
+            player.deal_hand(hand)
 
-    win = random.randint(0, num_players-1)
-    print("Player " + str(win) +" you win this round! your score is " + str(score))
-    print("")
-    print("--------------------------------")
+    def play_game(self):
+        self.start()
+        while len(self.green_deck > 0):
+            judge = self.players[random.randint(0,num_players-1)]
+            play_round(self, judge)
 
-    for j in range(num_players):
+        print("Game over! Your score is " + str(score))
 
-        new_card = red_deck.pop()
-        hands[j].append(new_card)
-        print("Player " + str(j) + " here is your new card: " + new_card)
-print("Game over! Your score is " + str(score))
+
+    def win_round(self):
+        win = random.randint(0, self.num_players-1)
+        print("Player " + str(win) +" you win this round! your score is " + str(score))
+        print("")
+        print("--------------------------------")
+
+    def play_round(self, judge):
+        green_card = self.green_deck.pop()
+        for player in self.players: 
+            print("Player " + str(j) + " here are your cards: " + str(hands[j])) #render each player's cards
+        print("The green apple is: " + green_card) #render green card
+
+        for player in self.players:
+            submission = input("Player " + str(j) + " Submit a card: ") #wait for every player to submit a card
+            while submission not in player.get_hand(): #we don't need this with the GUI
+                print("This word is not in your hand")
+            player.remove_card(submission)
+
+        self.win_round()
+
+        for player in self.players: #give each player a new card
+            new_card = self.red_deck.pop()
+            player.give_card(new_card)
+            print("Player " + player.name() + " here is your new card: " + new_card)
+
+
+a = ApplesToApples()
+
