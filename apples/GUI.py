@@ -1,6 +1,26 @@
 from tkinter import *
 import tkinter as tk
 #Buttons
+
+class ApplesGUI:
+    def __init__(self):
+        self.root = tk.Tk()
+
+
+    def start_screen(self):
+        frame = Frame(self.root, bg='#cc9900', width=1200, height=1800)
+        frame.pack()
+        canvas = Canvas(self.root, width=1280, height=1080, bg="grey")
+        canvas.pack()
+        b = Button(frame, text="Start", command=self.start)
+        b.pack()
+        self.root.mainloop()
+
+    def start(self):
+        print("started")
+
+r = ApplesGUI().start_screen()
+
 root = tk.Tk ()
 frame = Frame(root, bg='grey', width=400, height=40)
 frame.pack(fill='x')

@@ -19,11 +19,15 @@ class Apple:
 
     def render(self):
         # Render this apple in the window 
+
+        # In the GUI, you can have 7 cards laid out
+        # Then, when the player gets a card, you display its str() version on the rectangular card
         pass
 
     def __str__(self):
         # Name : Flavor Text
         return self.name + ": " + self.flavor_text
+
 
 class Player:
     def __init__(self, name):
