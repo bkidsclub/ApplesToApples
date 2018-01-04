@@ -20,8 +20,13 @@ class Apple:
     def render(self):
         # Render this apple in the window 
 
-        # In the GUI, you can have 7 cards laid out
-        # Then, when the player gets a card, you display its str() version on the rectangular card
+        if self.red:
+            # In the GUI, you can have 7 cards laid out
+            # Then, when the player gets a card, you display its str() version on the rectangular card
+
+        else:
+            #In the GUI you can have one green card in the center laid out
+            #Then, when the green card changes, you display its str() version on the laid out green card
         pass
 
     def __str__(self):
