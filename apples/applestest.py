@@ -23,11 +23,11 @@ class Apple:
         if self.red:
             # In the GUI, you can have 7 cards laid out
             # Then, when the player gets a card, you display its str() version on the rectangular card
-
+            pass
         else:
             #In the GUI you can have one green card in the center laid out
             #Then, when the green card changes, you display its str() version on the laid out green card
-        pass
+            pass
 
     def __str__(self):
         # Name : Flavor Text
@@ -113,7 +113,8 @@ class ApplesToApples:
 
 
     def win_round(self, judge, submitted):
-        print(judge.get_name() + ", the submitted cards are: " + str(random.shuffle(submitted)))
+        random.shuffle(submitted)
+        print(judge.get_name() + ", the submitted cards are: " + str(submitted))
         winner = input("Select a winner: ")
         while winner not in submitted:
             print("That is not one of the submitted cards")
@@ -147,6 +148,7 @@ class ApplesToApples:
             player.play_card(submission)
             submitted.append(submission)
 
+        print("submitted: " + str(submitted))
         winner = self.win_round(judge, submitted)
         for player in round_players:
             if player.get_played_card() == winner:
