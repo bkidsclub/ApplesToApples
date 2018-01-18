@@ -1,0 +1,311 @@
+var _user$project$Chat$colors = {
+	mauve: A4(_elm_lang$core$Color$rgba, 176, 161, 186, 1),
+	blue1: A4(_elm_lang$core$Color$rgba, 165, 181, 191, 1),
+	blue2: A4(_elm_lang$core$Color$rgba, 171, 200, 199, 1),
+	green1: A4(_elm_lang$core$Color$rgba, 184, 226, 200, 1),
+	green2: A4(_elm_lang$core$Color$rgba, 191, 240, 212, 1)
+};
+var _user$project$Chat$H3 = {ctor: 'H3'};
+var _user$project$Chat$Main = {ctor: 'Main'};
+var _user$project$Chat$Chat = {ctor: 'Chat'};
+var _user$project$Chat$MessageBox = {ctor: 'MessageBox'};
+var _user$project$Chat$messageBox = A3(
+	_mdgriffith$style_elements$Element$el,
+	_user$project$Chat$MessageBox,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$height(
+			_mdgriffith$style_elements$Element_Attributes$px(300)),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	_mdgriffith$style_elements$Element$text('Message box'));
+var _user$project$Chat$Inspector = {ctor: 'Inspector'};
+var _user$project$Chat$inspector = A3(
+	_mdgriffith$style_elements$Element$column,
+	_user$project$Chat$Inspector,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$padding(20),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$width(
+					_mdgriffith$style_elements$Element_Attributes$px(200)),
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element$text('Inspector'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Chat$Sidebar = {ctor: 'Sidebar'};
+var _user$project$Chat$sidebar = A3(
+	_mdgriffith$style_elements$Element$column,
+	_user$project$Chat$Sidebar,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$padding(20),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$width(
+					_mdgriffith$style_elements$Element_Attributes$px(300)),
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_mdgriffith$style_elements$Element$el,
+			_user$project$Chat$H3,
+			{ctor: '[]'},
+			_mdgriffith$style_elements$Element$text('Channels')),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Chat$Navbar = {ctor: 'Navbar'};
+var _user$project$Chat$navbar = A3(
+	_mdgriffith$style_elements$Element$el,
+	_user$project$Chat$Navbar,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$padding(20),
+		_1: {ctor: '[]'}
+	},
+	_mdgriffith$style_elements$Element$text('Navbar'));
+var _user$project$Chat$Label = {ctor: 'Label'};
+var _user$project$Chat$Container = {ctor: 'Container'};
+var _user$project$Chat$None = {ctor: 'None'};
+var _user$project$Chat$stylesheet = _mdgriffith$style_elements$Style$styleSheet(
+	{
+		ctor: '::',
+		_0: A2(
+			_mdgriffith$style_elements$Style$style,
+			_user$project$Chat$None,
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_mdgriffith$style_elements$Style$style,
+				_user$project$Chat$Container,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$black),
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.blue2),
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Color$border(_elm_lang$core$Color$lightGrey),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Style$style,
+					_user$project$Chat$Chat,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.blue1),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style$style,
+						_user$project$Chat$Navbar,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.mauve),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style$style,
+							_user$project$Chat$Sidebar,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.green1),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_mdgriffith$style_elements$Style$style,
+								_user$project$Chat$Inspector,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.green2),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_mdgriffith$style_elements$Style$style,
+									_user$project$Chat$MessageBox,
+									{
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Style_Color$background(_user$project$Chat$colors.blue2),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_mdgriffith$style_elements$Style$style,
+										_user$project$Chat$Main,
+										{
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Style_Font$typeface(
+												{
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Style_Font$font('helvetica'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_mdgriffith$style_elements$Style$style,
+											_user$project$Chat$H3,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Style_Font$size(20),
+												_1: {
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Style_Font$weight(400),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Chat$message = function (n) {
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_user$project$Chat$None,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$padding(10),
+			_1: {ctor: '[]'}
+		},
+		_mdgriffith$style_elements$Element$text(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'message',
+				_elm_lang$core$Basics$toString(n))));
+};
+var _user$project$Chat$messages = A3(
+	_mdgriffith$style_elements$Element$column,
+	_user$project$Chat$Chat,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$yScrollbar,
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	A2(
+		_elm_lang$core$List$map,
+		_user$project$Chat$message,
+		A2(_elm_lang$core$List$range, 1, 100)));
+var _user$project$Chat$body = A3(
+	_mdgriffith$style_elements$Element$column,
+	_user$project$Chat$None,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+			_1: {ctor: '[]'}
+		}
+	},
+	{
+		ctor: '::',
+		_0: _user$project$Chat$messages,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Chat$messageBox,
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Chat$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
+	A2(
+		_mdgriffith$style_elements$Element$viewport,
+		_user$project$Chat$stylesheet,
+		A3(
+			_mdgriffith$style_elements$Element$column,
+			_user$project$Chat$Main,
+			{
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Chat$navbar,
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_mdgriffith$style_elements$Element$row,
+						_user$project$Chat$None,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Chat$sidebar,
+							_1: {
+								ctor: '::',
+								_0: _user$project$Chat$body,
+								_1: {
+									ctor: '::',
+									_0: _user$project$Chat$inspector,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			})));
