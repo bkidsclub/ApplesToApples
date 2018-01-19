@@ -1,46 +1,328 @@
-var _user$project$Main$unselectedApple = {
+var _user$project$Main$greenApples = {
 	ctor: '::',
-	_0: _seanhess$elm_style$Style$color('#00FF00'),
+	_0: _seanhess$elm_style$Style$marginTop('20px'),
 	_1: {ctor: '[]'}
 };
-var _user$project$Main$selectedApple = {
+var _user$project$Main$appleStyle = {
 	ctor: '::',
-	_0: _seanhess$elm_style$Style$color('#FF0000'),
-	_1: {ctor: '[]'}
-};
-var _user$project$Main$address = 'ws://127.0.0.1:8123/';
-var _user$project$Main$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {player: a, name: b, green: c, hand: d, submitted: e, judging: f, winner: g, score: h};
-	});
-var _user$project$Main$init = {
-	ctor: '_Tuple2',
-	_0: A8(
-		_user$project$Main$Model,
-		0,
-		'',
-		'',
-		{
+	_0: _seanhess$elm_style$Style$width('120px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$padding('10px'),
+		_1: {
 			ctor: '::',
-			_0: 'nadya',
+			_0: _seanhess$elm_style$Style$border('2px solid black'),
 			_1: {
 				ctor: '::',
-				_0: 'is',
+				_0: _seanhess$elm_style$Style$marginRight('20px'),
 				_1: {
 					ctor: '::',
-					_0: 'the',
+					_0: _seanhess$elm_style$Style$fontSize('18px'),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$selectedApple = _elm_lang$core$List$concat(
+	{
+		ctor: '::',
+		_0: _user$project$Main$appleStyle,
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$background('#FFFFFF'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$color('#000000'),
 					_1: {
 						ctor: '::',
-						_0: 'best',
+						_0: _seanhess$elm_style$Style$fontWeight('bold'),
 						_1: {ctor: '[]'}
 					}
 				}
+			},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Main$unselectedApple = _elm_lang$core$List$concat(
+	{
+		ctor: '::',
+		_0: _user$project$Main$appleStyle,
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$background('#000000'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$color('#FFFFFF'),
+					_1: {ctor: '[]'}
+				}
+			},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Main$greenUnderline = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$display('inline-block'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$width('120px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$borderBottomStyle('solid'),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$borderBottomWidth('2px'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$borderBottomColor('#000000'),
+					_1: {
+						ctor: '::',
+						_0: _seanhess$elm_style$Style$marginLeft('5px'),
+						_1: {
+							ctor: '::',
+							_0: _seanhess$elm_style$Style$marginTop('10px'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
 			}
-		},
-		'',
-		false,
-		'',
-		0),
+		}
+	}
+};
+var _user$project$Main$greenStyle = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('22px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontWeight('bold'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$marginTop('10px'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$gameMain = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$border('1px solid black'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$padding('20px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$display('inline-block'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$playerName = {ctor: '[]'};
+var _user$project$Main$playerLabel = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$color('#ABABAB'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Main$spacer = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$paddingTop('20px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$borderStyle('none'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Main$info = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$margin('0 0 30px 0'),
+	_1: {ctor: '[]'}
+};
+var _user$project$Main$enterButton = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$padding('5px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontSize('16px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$border('2px solid black'),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$background('white'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$fontWeight('bold'),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$enterName = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$margin('0 10px 0 10px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$padding('5px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$fontSize('18px'),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$border('none'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$borderBottomStyle('solid'),
+					_1: {
+						ctor: '::',
+						_0: _seanhess$elm_style$Style$borderBottomWidth('2px'),
+						_1: {
+							ctor: '::',
+							_0: _seanhess$elm_style$Style$borderBottomColor('black'),
+							_1: {
+								ctor: '::',
+								_0: _seanhess$elm_style$Style$fontWeight('bold'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$nameBox = {ctor: '[]'};
+var _user$project$Main$serverError = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('22px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontWeight('bold'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$color('red'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$judgingTitle = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$marginBottom('20px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontSize('18px'),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Main$titleStyle = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('32px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontWeight('bold'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$marginBottom('20px'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$mainContainer = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontFamily('sans-serif'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontSize('18px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$padding('50px'),
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Main$address = 'ws://127.0.0.1:8123/';
+var _user$project$Main$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {player: a, name: b, serverError: c, green: d, hand: e, submitted: f, winner: g, score: h, round: i, toJudge: j, judgeName: k, allPlayers: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Main$modelDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'allPlayers',
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'judgeName',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'toJudge',
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'round',
+				_elm_lang$core$Json_Decode$int,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'score',
+					_elm_lang$core$Json_Decode$int,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'winner',
+						_elm_lang$core$Json_Decode$string,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'submitted',
+							_elm_lang$core$Json_Decode$string,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'hand',
+								_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'green',
+									_elm_lang$core$Json_Decode$string,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'serverError',
+										_elm_lang$core$Json_Decode$string,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'name',
+											_elm_lang$core$Json_Decode$string,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'player',
+												_elm_lang$core$Json_Decode$int,
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$Model)))))))))))));
+var _user$project$Main$init = {
+	ctor: '_Tuple2',
+	_0: _user$project$Main$Model(0)('')('')('')(
+		{ctor: '[]'})('')('')(0)(0)(
+		{ctor: '[]'})('')(
+		{ctor: '[]'}),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$ServerMsg = function (a) {
@@ -57,12 +339,9 @@ var _user$project$Main$update = F2(
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'Select':
-				var _p1 = _p0._0;
 				return {
 					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{submitted: _p1}),
+					_0: model,
 					_1: A2(
 						_elm_lang$websocket$WebSocket$send,
 						_user$project$Main$address,
@@ -82,19 +361,16 @@ var _user$project$Main$update = F2(
 										_0: {
 											ctor: '_Tuple2',
 											_0: 'red',
-											_1: _elm_lang$core$Json_Encode$string(_p1)
+											_1: _elm_lang$core$Json_Encode$string(_p0._0)
 										},
 										_1: {ctor: '[]'}
 									}
 								})))
 				};
 			case 'Winner':
-				var _p2 = _p0._0;
 				return {
 					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{winner: _p2}),
+					_0: model,
 					_1: A2(
 						_elm_lang$websocket$WebSocket$send,
 						_user$project$Main$address,
@@ -114,7 +390,7 @@ var _user$project$Main$update = F2(
 										_0: {
 											ctor: '_Tuple2',
 											_0: 'winner',
-											_1: _elm_lang$core$Json_Encode$string(_p2)
+											_1: _elm_lang$core$Json_Encode$string(_p0._0)
 										},
 										_1: {ctor: '[]'}
 									}
@@ -138,12 +414,12 @@ var _user$project$Main$update = F2(
 						A2(_elm_lang$core$Random$int, 0, 999999999))
 				};
 			case 'SubmitID':
-				var _p3 = _p0._0;
+				var _p1 = _p0._0;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{player: _p3}),
+						{player: _p1}),
 					_1: A2(
 						_elm_lang$websocket$WebSocket$send,
 						_user$project$Main$address,
@@ -156,7 +432,7 @@ var _user$project$Main$update = F2(
 									_0: {
 										ctor: '_Tuple2',
 										_0: 'id',
-										_1: _elm_lang$core$Json_Encode$int(_p3)
+										_1: _elm_lang$core$Json_Encode$int(_p1)
 									},
 									_1: {
 										ctor: '::',
@@ -170,7 +446,30 @@ var _user$project$Main$update = F2(
 								})))
 				};
 			default:
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				var _p3 = _p0._0;
+				if (_elm_lang$core$Native_Utils.eq(
+					_elm_lang$core$String$length(_p3),
+					0)) {
+					return {
+						ctor: '_Tuple2',
+						_0: model,
+						_1: A2(_elm_lang$websocket$WebSocket$send, _user$project$Main$address, '')
+					};
+				} else {
+					var updated = function () {
+						var _p2 = A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Main$modelDecoder, _p3);
+						if (_p2.ctor === 'Ok') {
+							return _p2._0;
+						} else {
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									serverError: A2(_elm_lang$core$Basics_ops['++'], 'unable to parse server response: ', _p2._0)
+								});
+						}
+					}();
+					return {ctor: '_Tuple2', _0: updated, _1: _elm_lang$core$Platform_Cmd$none};
+				}
 		}
 	});
 var _user$project$Main$SubmitName = {ctor: 'SubmitName'};
@@ -186,12 +485,20 @@ var _user$project$Main$Select = function (a) {
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$mainContainer),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$div,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$titleStyle),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text('Apples to Apples'),
@@ -199,119 +506,511 @@ var _user$project$Main$view = function (model) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: A2(
+				_0: _elm_lang$core$Native_Utils.eq(
+					_elm_lang$core$String$length(model.serverError),
+					0) ? A2(
 					_elm_lang$html$Html$div,
 					{ctor: '[]'},
-					_elm_lang$core$Native_Utils.eq(model.player, 0) ? {
+					{ctor: '[]'}) : A2(
+					_elm_lang$html$Html$div,
+					{
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$input,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$EnterName),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Lunch'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$serverError),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(model.serverError),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SubmitName),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('go'),
-									_1: {ctor: '[]'}
-								}),
+							_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$nameBox),
 							_1: {ctor: '[]'}
-						}
-					} : {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'player is ',
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											model.name,
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												' : ',
-												_elm_lang$core$Basics$toString(model.player))))),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						},
+						_elm_lang$core$Native_Utils.eq(model.player, 0) ? {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$div,
+								_elm_lang$html$Html$span,
 								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(model.green),
+									_0: _elm_lang$html$Html$text('Enter your name:'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$core$Native_Utils.eq(
-									_elm_lang$core$String$length(model.submitted),
-									0) ? A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									A2(
-										_elm_lang$core$List$map,
-										function (card) {
-											return A2(
-												_elm_lang$html$Html$button,
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$enterName),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$EnterName),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$enterButton),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SubmitName),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Start Game'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						} : {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$info),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(
-														_user$project$Main$Select(card)),
+													_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerLabel),
 													_1: {ctor: '[]'}
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text(card),
+													_0: _elm_lang$html$Html$text('Player '),
 													_1: {ctor: '[]'}
-												});
-										},
-										model.hand)) : A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									A2(
-										_elm_lang$core$List$map,
-										function (card) {
-											return A2(
-												_elm_lang$html$Html$button,
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerName),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(model.name),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerLabel),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Players '),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerName),
+															_1: {ctor: '[]'}
+														},
+														A2(
+															_elm_lang$core$List$map,
+															function (player) {
+																return _elm_lang$html$Html$text(
+																	A2(_elm_lang$core$Basics_ops['++'], player, ', '));
+															},
+															model.allPlayers)),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$style(
-														_elm_lang$core$Native_Utils.eq(model.submitted, card) ? _user$project$Main$selectedApple : _user$project$Main$unselectedApple),
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerLabel),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Score '),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerName),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(
+																	_elm_lang$core$Basics$toString(model.score)),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: (!_elm_lang$core$Native_Utils.eq(model.judgeName, model.name)) ? A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$gameMain),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerLabel),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Round '),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerName),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(
+																_elm_lang$core$Basics$toString(model.round)),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerLabel),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Judge '),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$playerName),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(model.judgeName),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$hr,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$spacer),
+														_1: {ctor: '[]'}
+													},
+													{ctor: '[]'}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$span,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenStyle),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(model.green),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$core$Native_Utils.eq(
+																	_elm_lang$core$String$length(model.submitted),
+																	0) ? A2(
+																	_elm_lang$html$Html$span,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenUnderline),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}) : A2(
+																	_elm_lang$html$Html$span,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenStyle),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(
+																			A2(_elm_lang$core$Basics_ops['++'], ' ', model.submitted)),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenApples),
+																_1: {ctor: '[]'}
+															},
+															_elm_lang$core$Native_Utils.eq(
+																_elm_lang$core$String$length(model.submitted),
+																0) ? A2(
+																_elm_lang$core$List$map,
+																function (card) {
+																	return A2(
+																		_elm_lang$html$Html$button,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$unselectedApple),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Events$onClick(
+																					_user$project$Main$Select(card)),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(card),
+																			_1: {ctor: '[]'}
+																		});
+																},
+																model.hand) : A2(
+																_elm_lang$core$List$map,
+																function (card) {
+																	return A2(
+																		_elm_lang$html$Html$button,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$style(
+																				_elm_lang$core$Native_Utils.eq(model.submitted, card) ? _user$project$Main$selectedApple : _user$project$Main$unselectedApple),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(card),
+																			_1: {ctor: '[]'}
+																		});
+																},
+																model.hand)),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}) : A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$judgingTitle),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_elm_lang$core$Basics_ops['++'], model.name, ', you are judging!')),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$gameMain),
 													_1: {ctor: '[]'}
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text(card),
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$span,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenStyle),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(model.green),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$span,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$greenUnderline),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$hr,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$spacer),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$core$Native_Utils.eq(
+																		_elm_lang$core$List$length(model.toJudge),
+																		0) ? _elm_lang$html$Html$text('waiting') : A2(
+																		_elm_lang$html$Html$div,
+																		{ctor: '[]'},
+																		A2(
+																			_elm_lang$core$List$map,
+																			function (submitted) {
+																				return A2(
+																					_elm_lang$html$Html$button,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$unselectedApple),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Events$onClick(
+																								_user$project$Main$Winner(submitted)),
+																							_1: {ctor: '[]'}
+																						}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(submitted),
+																						_1: {ctor: '[]'}
+																					});
+																			},
+																			model.toJudge)),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
 													_1: {ctor: '[]'}
-												});
-										},
-										model.hand)),
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
 								_1: {ctor: '[]'}
 							}
-						}
-					}),
-				_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

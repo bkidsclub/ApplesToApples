@@ -2,6 +2,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Encode exposing (..)
+import Json.Decode exposing (..)
+import Json.Decode.Pipeline exposing (decode, required)
 import WebSocket
 import Random
 import Style exposing (..)
@@ -25,17 +27,39 @@ main =
 type alias Model =
   { player : Int
   , name : String
+  , serverError : String
   , green : String
   , hand : List String
   , submitted : String
-  , judging : Bool
   , winner : String
   , score : Int
+  , round : Int
+  , toJudge : List String
+  , judgeName : String
+  , allPlayers: List String
   }
+
+
+modelDecoder : Decoder Model
+modelDecoder =
+  decode Model
+  |> Json.Decode.Pipeline.required "player" Json.Decode.int
+  |> Json.Decode.Pipeline.required "name" Json.Decode.string
+  |> Json.Decode.Pipeline.required "serverError" Json.Decode.string
+  |> Json.Decode.Pipeline.required "green" Json.Decode.string
+  |> Json.Decode.Pipeline.required "hand" (Json.Decode.list Json.Decode.string)
+  |> Json.Decode.Pipeline.required "submitted" Json.Decode.string
+  |> Json.Decode.Pipeline.required "winner" Json.Decode.string
+  |> Json.Decode.Pipeline.required "score" Json.Decode.int
+  |> Json.Decode.Pipeline.required "round" Json.Decode.int
+  |> Json.Decode.Pipeline.required "toJudge" (Json.Decode.list Json.Decode.string)
+  |> Json.Decode.Pipeline.required "judgeName" Json.Decode.string
+  |> Json.Decode.Pipeline.required "allPlayers" (Json.Decode.list Json.Decode.string)
+
 
 init : (Model, Cmd Msg)
 init =
-  (Model 0 "" "" ["nadya", "is", "the", "best"] "" False "" 0, Cmd.none)
+  (Model 0 "" "" "" [] "" "" 0 0 [] "" [], Cmd.none)
 
 
 -- UPDATE
@@ -52,7 +76,7 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Select card ->
-      ({ model | submitted = card }
+      (model
       , WebSocket.send address
         (Json.Encode.encode 0
           (Json.Encode.object
@@ -64,7 +88,7 @@ update msg model =
       )
 
     Winner card ->
-      ({ model | winner = card }
+      (model
       , WebSocket.send address
         (Json.Encode.encode 0
           (Json.Encode.object
@@ -94,8 +118,15 @@ update msg model =
       )
 
     ServerMsg content ->
-      (model, Cmd.none)
-      -- TODO: handle
+      if String.length content == 0 then
+        (model, WebSocket.send address "")
+      else
+        let
+          updated = case Json.Decode.decodeString modelDecoder content of
+            Ok decoded -> decoded
+            Err msg -> { model | serverError = "unable to parse server response: " ++ msg }
+        in
+          (updated, Cmd.none)
 
 
 -- SUBSCRIPTIONS
@@ -107,30 +138,206 @@ subscriptions model =
 
 -- VIEW
 
+mainContainer : List Style
+mainContainer =
+  [ fontFamily "sans-serif"
+  , fontSize "18px"
+  , padding "50px"
+  ]
+
+titleStyle : List Style
+titleStyle =
+  [ fontSize "32px"
+  , fontWeight "bold"
+  , marginBottom "20px"
+  ]
+
+judgingTitle : List Style
+judgingTitle =
+  [ marginBottom "20px"
+  , fontSize "18px"
+  ]
+
+serverError : List Style
+serverError =
+  [ fontSize "22px"
+  , fontWeight "bold"
+  , color "red"
+  ]
+
+nameBox : List Style
+nameBox =
+  [ ]
+
+enterName : List Style
+enterName =
+  [ margin "0 10px 0 10px"
+  , padding "5px"
+  , fontSize "18px"
+  , border "none"
+  , borderBottomStyle "solid"
+  , borderBottomWidth "2px"
+  , borderBottomColor "black"
+  , fontWeight "bold"
+  ]
+
+enterButton : List Style
+enterButton =
+  [ padding "5px"
+  , fontSize "16px"
+  , border "2px solid black"
+  , background "white"
+  , fontWeight "bold"
+  ]
+
+info : List Style
+info =
+  [ margin "0 0 30px 0"]
+
+spacer : List Style
+spacer =
+  [ paddingTop "20px"
+  , borderStyle "none"
+  ]
+
+playerLabel : List Style
+playerLabel =
+  [ color "#ABABAB" ]
+
+playerName : List Style
+playerName =
+  [ ]
+
+gameMain : List Style
+gameMain =
+  [ border "1px solid black"
+  , padding "20px"
+  , display "inline-block"
+  ]
+
+greenStyle : List Style
+greenStyle =
+  [ fontSize "22px"
+  , fontWeight "bold"
+  , marginTop "10px"
+  ]
+
+greenUnderline : List Style
+greenUnderline =
+  [ display "inline-block"
+  , Style.width "120px"
+  , borderBottomStyle "solid"
+  , borderBottomWidth "2px"
+  , borderBottomColor "#000000"
+  , marginLeft "5px"
+  , marginTop "10px"
+  ]
+
+appleStyle : List Style
+appleStyle =
+  [ Style.width "120px"
+  , padding "10px"
+  , border "2px solid black"
+  , marginRight "20px"
+  , fontSize "18px"
+  ]
+
 selectedApple : List Style
 selectedApple =
-  [ color "#FF0000"
-  ]
+  List.concat
+    [ appleStyle,
+      [ background "#FFFFFF"
+      , color "#000000"
+      , fontWeight "bold"
+      ]
+    ]
 
 unselectedApple : List Style
 unselectedApple =
-  [ color "#00FF00"
+  List.concat
+    [ appleStyle,
+      [ background "#000000"
+      , color "#FFFFFF"
+      ]
+    ]
+
+greenApples : List Style
+greenApples =
+  [ marginTop "20px"
+
   ]
+
 
 view : Model -> Html Msg
 view model =
-  div [] 
-    [ div [] [text "Apples to Apples"]
-    , div [] (if model.player == 0 then
-        [ input [onInput EnterName] [text "Lunch"]
-        , button [onClick SubmitName] [text "go"]
+  div [style mainContainer]
+    [ div [style titleStyle] [text "Apples to Apples"]
+    , (if String.length model.serverError == 0 then
+        div [] []
+      else
+        div [style serverError] [text model.serverError]
+      )
+    , div [style nameBox] (if model.player == 0 then
+        [ span [] [text "Enter your name:"]
+        , input [style enterName, onInput EnterName] []
+        , button [style enterButton, onClick SubmitName] [text "Start Game"]
         ]
       else
-        [ div [] [ text ("player is " ++ model.name ++ " : " ++ toString model.player)]
-        , div [] [ text (model.green) ]
-        , (if String.length model.submitted == 0 
-          then div [] (List.map (\ card -> button [onClick (Select card)] [text card]) model.hand)
-          else div [] (List.map (\ card -> button [style (if model.submitted == card then selectedApple else unselectedApple)] [text card]) model.hand))
-        ]
+        [ div [style info]
+          [ div []
+            [ span [style playerLabel] [text "Player "]
+            , span [style playerName] [text model.name]
+            ]
+          , div []
+            [ span [style playerLabel] [text "Players "]
+            , span [style playerName] (List.map (\player -> text (player ++ ", ")) model.allPlayers)
+            ]
+          , div []
+            [ span [style playerLabel] [text "Score "]
+            , span [style playerName] [text (toString model.score)]
+            ]
+          ]
+        , (if model.judgeName /= model.name then
+          -- Playing
+            div [style gameMain]
+            [ div []
+              [ span [style playerLabel] [text "Round "]
+              , span [style playerName] [text (toString model.round)]
+              ]
+            , div []
+              [ span [style playerLabel] [text "Judge "]
+              , span [style playerName] [text model.judgeName]
+              ]
+            , hr [style spacer] []
+            , div []
+              [ span [style greenStyle] [text (model.green)]
+              , (if String.length model.submitted == 0 then
+                  span [style greenUnderline] []
+                else
+                  span [style greenStyle] [text (" " ++ model.submitted)])
+              ]
+            , div [style greenApples]
+              (if String.length model.submitted == 0 then
+                (List.map (\ card -> button [style unselectedApple, onClick (Select card)] [text card]) model.hand)
+              else
+                (List.map (\ card -> button [style (if model.submitted == card then selectedApple else unselectedApple)] [text card]) model.hand))
+            ]
+          
+        else
+          -- Judging
+          div [] 
+          [ div [style judgingTitle] [ text (model.name ++ ", you are judging!")]
+          , div [style gameMain]
+            [ div []
+              [ div []
+                [ span [style greenStyle] [text (model.green)]
+                , span [style greenUnderline] []
+                ]
+              , hr [style spacer] []
+              , (if List.length model.toJudge == 0 then text "waiting" else div [] (List.map (\ submitted -> button [style unselectedApple, onClick (Winner submitted)] [text submitted]) model.toJudge))
+              ]
+            ]
+          ]
+        )]
       )
     ]
