@@ -25,9 +25,14 @@ type alias Model =
   , judgeName : String
   }
 """
-
-gapple = load.loadCards('GAPPLE')
-rapple = load.loadCards('RAPPLE')
+gapple = []
+rapple = []
+clients = set()
+green = ''
+round = 0
+toJudge = []
+judge = ''
+winner = ''
 
 def generate_green():
     return gapple.pop()
@@ -37,13 +42,25 @@ def generate_hand(hand):
         hand.append(rapple.pop())
     return hand
 
+def reload_game():
+    global gapple
+    global rapple
+    global judge
+    global green
+    global clients
+    global round
+    global toJudge
+    global winner
+    gapple = load.loadCards('GAPPLE')
+    rapple = load.loadCards('RAPPLE')
+    clients = set()
+    green = generate_green()
+    round = 0
+    toJudge = []
+    judge = ''
+    winner = ''
 
-clients = set()
-green = generate_green()
-round = 0
-toJudge = []
-judge = ''
-winner = ''
+
 
 
 async def hello(websocket, path):
@@ -164,9 +181,10 @@ async def hello(websocket, path):
         print("client disconnected")
         print("number of players: " + str(len(players)))
         if len(players) == 0:
-            pass
+            reload_game()
 
 
+reload_game()
 start_server = websockets.serve(hello, '127.0.0.1', 8123)
 
 asyncio.get_event_loop().run_until_complete(start_server)
