@@ -6,6 +6,7 @@
 * block new players from joining during a running game
 * have multiple ongoing games at the same time with different people
 * clean up code
+* rewrite in Haskell
 
 ### Fun TODO
 * add new cards
