@@ -36,7 +36,8 @@ type alias Model =
   , round : Int
   , toJudge : List String
   , judgeName : String
-  , allPlayers: List String
+  , allPlayers : List String
+  , leaderboard : List (String, Int)
   }
 
 
@@ -55,11 +56,12 @@ modelDecoder =
   |> Json.Decode.Pipeline.required "toJudge" (Json.Decode.list Json.Decode.string)
   |> Json.Decode.Pipeline.required "judgeName" Json.Decode.string
   |> Json.Decode.Pipeline.required "allPlayers" (Json.Decode.list Json.Decode.string)
+  |> Json.Decode.Pipeline.required "leaderboard" (Json.Decode.keyValuePairs Json.Decode.int)
 
 
 init : (Model, Cmd Msg)
 init =
-  (Model 0 "" "" "" [] "" "" 0 0 [] "" [], Cmd.none)
+  (Model 0 "" "" "" [] "" "" 0 0 [] "" [] [], Cmd.none)
 
 
 -- UPDATE
@@ -295,6 +297,16 @@ nextRound =
   , fontWeight "bold"
   ]
 
+leaderboard : List Style
+leaderboard =
+  [ Style.float "right" ]
+
+leaderboardTbl : List Style
+leaderboardTbl =
+  [ border "1px solid black"
+  ]
+
+
 view : Model -> Html Msg
 view model =
   div [style mainContainer]
@@ -323,6 +335,15 @@ view model =
             [ span [style playerLabel] [text "Score "]
             , span [style playerName] [text (toString model.score)]
             ]
+          ]
+        , div [style leaderboard]
+          -- Leaderboard
+          [ Html.table [style leaderboardTbl]
+            (List.concat
+              [ [ th [style leaderboardTbl] [text "Player"], th [style leaderboardTbl] [text "Score"]]
+              , (List.map (\(name, score) -> tr [] [td [style leaderboardTbl] [text name], td [style leaderboardTbl] [text (toString score)]]) model.leaderboard)
+              ]
+            )
           ]
         , (if model.judgeName /= model.name && List.length model.toJudge == 0 then
           -- Playing

@@ -23,6 +23,8 @@ type alias Model =
   , round : Int
   , toJudge : List String
   , judgeName : String
+  , allPlayers : List String
+  , leaderboard : List (String, Int)
   }
 """
 gapple = []
@@ -60,7 +62,8 @@ def reload_game():
     judge = ''
     winner = ''
 
-
+def leaderboard():
+    return {players[tid]['name']: players[tid]['score'] for tid in players}
 
 
 async def hello(websocket, path):
@@ -165,7 +168,8 @@ async def hello(websocket, path):
                     'round': round,
                     'toJudge': toJudge,
                     'judgeName': judge,
-                    'allPlayers': [players[id]['name'] for id in players]
+                    'allPlayers': [players[id]['name'] for id in players],
+                    'leaderboard': leaderboard()
                 }
 
                 if not broadcast:
