@@ -10588,6 +10588,40 @@ var _seanhess$elm_style$Style$PrefixSet = F5(
 	function (a, b, c, d, e) {
 		return {ms: a, moz: b, o: c, webkit: d, $default: e};
 	});
+var _user$project$Main$nextRound = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$margin('20px 0 0 0'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$padding('8px'),
+		_1: {
+			ctor: '::',
+			_0: _seanhess$elm_style$Style$fontSize('24px'),
+			_1: {
+				ctor: '::',
+				_0: _seanhess$elm_style$Style$border('2px solid black'),
+				_1: {
+					ctor: '::',
+					_0: _seanhess$elm_style$Style$background('white'),
+					_1: {
+						ctor: '::',
+						_0: _seanhess$elm_style$Style$fontWeight('bold'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$winner = {
+	ctor: '::',
+	_0: _seanhess$elm_style$Style$fontSize('24px'),
+	_1: {
+		ctor: '::',
+		_0: _seanhess$elm_style$Style$fontWeight('bold'),
+		_1: {ctor: '[]'}
+	}
+};
 var _user$project$Main$greenApples = {
 	ctor: '::',
 	_0: _seanhess$elm_style$Style$marginTop('20px'),
@@ -10915,6 +10949,7 @@ var _user$project$Main$init = {
 		{ctor: '[]'}),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
+var _user$project$Main$NextRound = {ctor: 'NextRound'};
 var _user$project$Main$ServerMsg = function (a) {
 	return {ctor: 'ServerMsg', _0: a};
 };
@@ -11035,7 +11070,7 @@ var _user$project$Main$update = F2(
 									}
 								})))
 				};
-			default:
+			case 'ServerMsg':
 				var _p3 = _p0._0;
 				if (_elm_lang$core$Native_Utils.eq(
 					_elm_lang$core$String$length(_p3),
@@ -11060,6 +11095,35 @@ var _user$project$Main$update = F2(
 					}();
 					return {ctor: '_Tuple2', _0: updated, _1: _elm_lang$core$Platform_Cmd$none};
 				}
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						_user$project$Main$address,
+						A2(
+							_elm_lang$core$Json_Encode$encode,
+							0,
+							_elm_lang$core$Json_Encode$object(
+								{
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'id',
+										_1: _elm_lang$core$Json_Encode$int(model.player)
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'nextRound',
+											_1: _elm_lang$core$Json_Encode$bool(true)
+										},
+										_1: {ctor: '[]'}
+									}
+								})))
+				};
 		}
 	});
 var _user$project$Main$SubmitName = {ctor: 'SubmitName'};
@@ -11293,7 +11357,9 @@ var _user$project$Main$view = function (model) {
 								}),
 							_1: {
 								ctor: '::',
-								_0: (!_elm_lang$core$Native_Utils.eq(model.judgeName, model.name)) ? A2(
+								_0: ((!_elm_lang$core$Native_Utils.eq(model.judgeName, model.name)) && _elm_lang$core$Native_Utils.eq(
+									_elm_lang$core$List$length(model.toJudge),
+									0)) ? A2(
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
@@ -11484,7 +11550,9 @@ var _user$project$Main$view = function (model) {
 												}
 											}
 										}
-									}) : A2(
+									}) : ((_elm_lang$core$Native_Utils.eq(model.judgeName, model.name) && _elm_lang$core$Native_Utils.eq(
+									_elm_lang$core$String$length(model.winner),
+									0)) ? A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
 									{
@@ -11562,7 +11630,14 @@ var _user$project$Main$view = function (model) {
 																	ctor: '::',
 																	_0: _elm_lang$core$Native_Utils.eq(
 																		_elm_lang$core$List$length(model.toJudge),
-																		0) ? _elm_lang$html$Html$text('waiting') : A2(
+																		0) ? A2(
+																		_elm_lang$html$Html$div,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Waiting for players to submit cards...'),
+																			_1: {ctor: '[]'}
+																		}) : A2(
 																		_elm_lang$html$Html$div,
 																		{ctor: '[]'},
 																		A2(
@@ -11595,7 +11670,120 @@ var _user$project$Main$view = function (model) {
 												}),
 											_1: {ctor: '[]'}
 										}
-									}),
+									}) : A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$gameMain),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.eq(
+													_elm_lang$core$String$length(model.winner),
+													0) ? A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$winner),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Waiting for judge...'),
+														_1: {ctor: '[]'}
+													}) : A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$winner),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																'Winner: ',
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	model.green,
+																	A2(_elm_lang$core$Basics_ops['++'], ' ', model.winner)))),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$hr,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$spacer),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{ctor: '[]'},
+															A2(
+																_elm_lang$core$List$map,
+																function (card) {
+																	return A2(
+																		_elm_lang$html$Html$button,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$style(
+																				_elm_lang$core$Native_Utils.eq(model.winner, card) ? _user$project$Main$selectedApple : _user$project$Main$unselectedApple),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(card),
+																			_1: {ctor: '[]'}
+																		});
+																},
+																model.toJudge)),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.eq(model.judgeName, model.name) ? A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$button,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$nextRound),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$NextRound),
+																_1: {ctor: '[]'}
+															}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Next round!'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}) : A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									})),
 								_1: {ctor: '[]'}
 							}
 						}),

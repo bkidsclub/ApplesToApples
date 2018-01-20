@@ -71,6 +71,7 @@ type Msg
   | SubmitName
   | SubmitID Int
   | ServerMsg String
+  | NextRound
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -127,6 +128,17 @@ update msg model =
             Err msg -> { model | serverError = "unable to parse server response: " ++ msg }
         in
           (updated, Cmd.none)
+
+    NextRound ->
+      (model, WebSocket.send  address
+        (Json.Encode.encode 0
+          (Json.Encode.object
+            [ ("id", Json.Encode.int model.player)
+            , ("nextRound", Json.Encode.bool True)
+            ]
+          )
+        )
+      )
 
 
 -- SUBSCRIPTIONS
@@ -267,6 +279,21 @@ greenApples =
 
   ]
 
+winner : List Style
+winner =
+  [ fontSize "24px"
+  , fontWeight "bold"
+  ]
+
+nextRound : List Style
+nextRound =
+  [ margin "20px 0 0 0"
+  , padding "8px"
+  , fontSize "24px"
+  , border "2px solid black"
+  , background "white"
+  , fontWeight "bold"
+  ]
 
 view : Model -> Html Msg
 view model =
@@ -297,7 +324,7 @@ view model =
             , span [style playerName] [text (toString model.score)]
             ]
           ]
-        , (if model.judgeName /= model.name then
+        , (if model.judgeName /= model.name && List.length model.toJudge == 0 then
           -- Playing
             div [style gameMain]
             [ div []
@@ -318,14 +345,14 @@ view model =
               ]
             , div [style greenApples]
               (if String.length model.submitted == 0 then
-                (List.map (\ card -> button [style unselectedApple, onClick (Select card)] [text card]) model.hand)
+                (List.map (\card -> button [style unselectedApple, onClick (Select card)] [text card]) model.hand)
               else
-                (List.map (\ card -> button [style (if model.submitted == card then selectedApple else unselectedApple)] [text card]) model.hand))
+                (List.map (\card -> button [style (if model.submitted == card then selectedApple else unselectedApple)] [text card]) model.hand))
             ]
-          
-        else
+
+        else if model.judgeName == model.name && String.length model.winner == 0 then
           -- Judging
-          div [] 
+          div []
           [ div [style judgingTitle] [ text (model.name ++ ", you are judging!")]
           , div [style gameMain]
             [ div []
@@ -334,10 +361,33 @@ view model =
                 , span [style greenUnderline] []
                 ]
               , hr [style spacer] []
-              , (if List.length model.toJudge == 0 then text "waiting" else div [] (List.map (\ submitted -> button [style unselectedApple, onClick (Winner submitted)] [text submitted]) model.toJudge))
+              , (if List.length model.toJudge == 0 then
+                  div [] [text "Waiting for players to submit cards..."]
+                else
+                  div [] (List.map (\submitted -> button [style unselectedApple, onClick (Winner submitted)] [text submitted]) model.toJudge)
+                )
               ]
             ]
           ]
-        )]
+        else
+          -- Showing results
+          div []
+          [ div [style gameMain]
+            [ (if String.length model.winner == 0 then
+                span [style winner] [text "Waiting for judge..."]
+              else
+                span [style winner] [text ("Winner: " ++ model.green ++ " " ++ model.winner)]
+              )
+            , hr [style spacer] []
+            , div [] (List.map (\card -> button [style (if model.winner == card then selectedApple else unselectedApple)] [text card]) model.toJudge)
+            ]
+          , (if model.judgeName == model.name then
+              div [] [button [style nextRound, onClick NextRound] [text "Next round!"]]
+            else
+              div [] []
+            )
+          ]
+        )
+        ]
       )
     ]

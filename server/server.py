@@ -2,10 +2,13 @@ import asyncio
 import websockets
 import json
 import pprint
+import collections
+import random
+import load
 
 pp = pprint.PrettyPrinter(indent=4)
 
-players = {}
+players = collections.OrderedDict()
 
 """
 type alias Model =
@@ -23,23 +26,34 @@ type alias Model =
   }
 """
 
-clients = set()
+gapple = load.loadCards('GAPPLE')
+rapple = load.loadCards('RAPPLE')
 
-green = 'green'
-hand = ['a', 'b']
+def generate_green():
+    return gapple.pop()
+
+def generate_hand(hand):
+    for i in range(7 - len(hand)):
+        hand.append(rapple.pop())
+    return hand
+
+
+clients = set()
+green = generate_green()
 round = 0
 toJudge = []
 judge = ''
+winner = ''
+
 
 async def hello(websocket, path):
     global players
     global judge
     global green
     global clients
-    global hand
     global round
     global toJudge
-
+    global winner
 
     id = None
 
@@ -62,6 +76,7 @@ async def hello(websocket, path):
                             players[request['id']] = {
                                 'name': request['name'],
                                 'score': 0,
+                                'hand': generate_hand([]),
                                 'submitted': ""
                             }
                             broadcast = True
@@ -84,7 +99,40 @@ async def hello(websocket, path):
                         toJudge = [players[id]['submitted'] for id in players if players[id]['name'] != judge]
                 elif 'winner' in request:
                     print('judge submitted winner, round over')
-                    
+                    winner = request['winner']
+                    for tid in players:
+                        if players[tid]['submitted'] == winner:
+                            players[tid]['score'] += 1
+                            break
+                    broadcast = True
+                elif 'nextRound' in request:
+                    print("next round request received")
+                    if request['nextRound'] == True:
+                        print("next round is true")
+                        judgeID = 0
+                        for tid in players:
+                            if players[tid]['name'] == judge:
+                                judgeID = tid
+                                break
+                        if judgeID == request['id']:
+                            print("next round")
+                            # Go to next round
+                            round += 1
+                            for tid in players:
+                                if players[tid]['submitted'] in players[tid]['hand']:
+                                    players[tid]['hand'].remove(players[tid]['submitted'])
+                                players[tid]['hand'] = generate_hand(players[tid]['hand'])
+                                players[tid]['submitted'] = ''
+                            toJudge = []
+                            for i, tid in enumerate(players):
+                                if i == round % len(players):
+                                    judge = players[tid]['name']
+                                    break
+                            broadcast = True
+                            winner = ''
+                            # new green apple
+                            green = generate_green()
+
 
 
             if id in players:
@@ -93,9 +141,9 @@ async def hello(websocket, path):
                     'name': players[id]['name'],
                     'serverError': "",
                     'green': green,
-                    'hand': hand,
+                    'hand': players[id]['hand'],
                     'submitted': players[id]['submitted'],
-                    'winner': '',
+                    'winner': winner,
                     'score': players[id]['score'],
                     'round': round,
                     'toJudge': toJudge,
@@ -114,6 +162,9 @@ async def hello(websocket, path):
             del players[id]
         clients.remove(websocket)
         print("client disconnected")
+        print("number of players: " + str(len(players)))
+        if len(players) == 0:
+            pass
 
 
 start_server = websockets.serve(hello, '127.0.0.1', 8123)
