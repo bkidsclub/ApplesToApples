@@ -169,7 +169,8 @@ titleStyle =
 judgingTitle : List Style
 judgingTitle =
   [ marginBottom "20px"
-  , fontSize "18px"
+  , fontSize "24px"
+  , fontWeight "bold"
   ]
 
 serverError : List Style
@@ -239,7 +240,7 @@ greenStyle =
 greenUnderline : List Style
 greenUnderline =
   [ display "inline-block"
-  , Style.width "120px"
+  , Style.width "140px"
   , borderBottomStyle "solid"
   , borderBottomWidth "2px"
   , borderBottomColor "#000000"
@@ -249,7 +250,7 @@ greenUnderline =
 
 appleStyle : List Style
 appleStyle =
-  [ Style.width "120px"
+  [ Style.width "140px"
   , padding "10px"
   , border "2px solid black"
   , marginRight "20px"
@@ -395,7 +396,7 @@ view model =
           div []
           [ div [style gameMain]
             [ (if String.length model.winner == 0 then
-                span [style winner] [text "Waiting for judge..."]
+                span [style winner] [text ("Waiting for judge " ++ model.judgeName ++ ": " ++ model.green)]
               else
                 span [style winner] [text ("Winner: " ++ model.green ++ " " ++ model.winner)]
               )

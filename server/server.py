@@ -117,6 +117,7 @@ async def hello(websocket, path):
                         print("judging time")
                         broadcast = True
                         toJudge = [players[id]['submitted'] for id in players if players[id]['name'] != judge]
+                        random.shuffle(toJudge)
                 elif 'winner' in request:
                     print('judge submitted winner, round over')
                     winner = request['winner']
